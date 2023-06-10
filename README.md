@@ -1,1 +1,1 @@
-# open-ai-clone
+# chatGPT-clone
