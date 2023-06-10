@@ -15,7 +15,7 @@ function loader(element) {
     if(element.textContent === '....'){
       element.textContent = '';
     }
-  }, 300)
+  }, 300);
 }
 function typeText(element, text){
   let index = 0;
@@ -60,7 +60,7 @@ const handleSubmit = async (e) => {
 
   const data = new FormData(form);
 
-  chatContainer.innerHTML += chatStripe(false, data.get('promt'));
+  chatContainer.innerHTML += chatStripe(false, data.get('prompt'));
   form.reset();
 
   const uniqueId = generateUniqueId();

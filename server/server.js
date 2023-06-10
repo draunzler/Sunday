@@ -5,6 +5,8 @@ import {Configuration, OpenAIApi} from 'openai';
 
 dotenv.config();
 
+console.log(process.env.OPENAI_API_KEY)
+
 const configuration = new Configuration({
     apikey: process.env.OPENAI_API_KEY,
 });
@@ -39,8 +41,8 @@ app.post('/', async (req,res) => {
             bot: response.data.choices[0].text
         })
     } catch (error) {
-        console.log(error);
-        res.status(500).send({ error })
+        console.error(error)
+        res.status(500).send(error || 'Something went wrong');
     }
 })
 

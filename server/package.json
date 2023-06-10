@@ -1,5 +1,6 @@
 {
-  "name": "server",
+  "name": "gpt-server",
+  "private": "true",
   "version": "1.0.0",
   "description": "",
   "type": "module",
