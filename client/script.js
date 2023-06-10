@@ -59,4 +59,14 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
   const data = new FormData(form);
+
+  chatContainer.innerHTML += chatStripe(false, data.get('promt'));
+  form.reset();
+
+  const uniqueId = generateUniqueId();
+  chatContainer.innerHTML += chatStripe(true, " ", uniqueId);
+
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+  const messageDiv = document.getElementById(uniqueId);
+  loader(messageDiv);
 }
