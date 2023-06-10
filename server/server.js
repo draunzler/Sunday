@@ -39,6 +39,7 @@ app.post('/', async (req,res) => {
             bot: response.data.choices[0].text
         })
     } catch (error) {
-        
+        console.log(error);
+        res.status(500).send({ error })
     }
 })
