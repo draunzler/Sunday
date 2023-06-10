@@ -1,15 +1,15 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
-import {Configuration, Configuration, OpenAIApi} from 'openai';
+import {Configuration, OpenAIApi} from 'openai';
 
 dotenv.config();
 
-const Configuration = new Configuration({
-    apikey : process.env.OPENAI_API_KEY,
+const configuration = new Configuration({
+    apikey: process.env.OPENAI_API_KEY,
 });
 
-const openai = new OpenAIApi(Configuration);
+const openai = new OpenAIApi(configuration);
 
 const app = express();
 app.use(cors());
@@ -43,3 +43,5 @@ app.post('/', async (req,res) => {
         res.status(500).send({ error })
     }
 })
+
+app.listen(5000, () => console.log('Server is running on port http://localhost:5000'));
