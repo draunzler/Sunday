@@ -1,14 +1,18 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
+import morgan from 'morgan';
 import {Configuration, OpenAIApi} from 'openai';
 
 dotenv.config();
 
 console.log(process.env.OPENAI_API_KEY)
 
+//const { Configuration, OpenAIApi } = require("openai");
+
 const configuration = new Configuration({
-    apikey: process.env.OPENAI_API_KEY,
+    organization: "org-21fcpxo41sLmQF2F7vGHG9vo",
+    apiKey: process.env.OPENAI_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
@@ -16,6 +20,7 @@ const openai = new OpenAIApi(configuration);
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(morgan('dev'));
 
 app.get('/', async (req,res) => {
     res.status(200).send({
@@ -28,7 +33,7 @@ app.post('/', async (req,res) => {
         const prompt = req.body.prompt;
 
         const response = await openai.createCompletion({
-            model: "text-davinci-003",
+            model: "gpt-3.5-turbo",
             prompt: `${prompt}`,
             temperature: 0,
             max_tokens: 3000,
@@ -46,4 +51,4 @@ app.post('/', async (req,res) => {
     }
 })
 
-app.listen(5000, () => console.log('Server is running on port https://chatgpt-50ja.onrender.com'));
+app.listen(5000, () => console.log('Server is running on port http://localhost:5000/'));
