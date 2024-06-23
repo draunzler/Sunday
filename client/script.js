@@ -1,5 +1,5 @@
 import bot from './assets/bot.svg'
-import user from './assets/user.svg'
+// import {marked} from 'marked';
 
 const form = document.querySelector('form');
 const chatContainer = document.querySelector('#chat_container');
@@ -21,12 +21,12 @@ function typeText(element, text){
   let index = 0;
   let interval = setInterval(() => {
     if(index < text.length) {
-      element.innerHTML += text.charAt(index);
+      element.textContent += text.charAt(index);
       index++;
     } else {
       clearInterval(interval);
     }
-  }, 20)
+  }, 10)
 }
 
 function generateUniqueId() {
@@ -42,12 +42,9 @@ function chatStripe (isAi, value, uniqueId) {
     `
     <div class = "wrapper ${isAi && 'ai'}">
       <div class = "chat">
-        <div class = "profile">
-          <img
-            src = "${isAi ? bot : user}"
-            alt = "${isAi ? 'bot' : 'user'}"
-          />
-        </div>
+        ${isAi ? `<div class="profile">
+          <img src="${bot}" alt="bot"/>
+        </div>` : ''}
         <div class = "message" id = ${uniqueId}>${value}</div>
       </div>
     </div>
@@ -81,8 +78,6 @@ const handleSubmit = async (e) => {
     })
   })
 
-  console.log(response)
-
   clearInterval(loadInterval);
   messageDiv.innerHTML = '';
 
@@ -104,3 +99,11 @@ form.addEventListener('keyup', (e) => {
     handleSubmit(e);
   }
 })
+
+textarea = document.querySelector("#textbox");
+  textarea.addEventListener('input', autoResize, false);
+
+  function autoResize() {
+    this.style.height = 'auto';
+    this.style.height = this.scrollHeight + 'px';
+}
