@@ -9,6 +9,7 @@ import openai
 import os
 import logging
 import uvicorn
+import markdown2
 
 load_dotenv()
 
@@ -73,7 +74,7 @@ async def generate_response(prompt_request: PromptRequest):
         # else:
         response = gemini_model.generate_content(prompt)
         logger.info(f"{response.text}")
-        return {"bot": response.text}
+        return {"bot": markdown2.markdown(response.text)}
     except Exception as e:
         logger.error(f"Error generating response: {e}")
         raise HTTPException(status_code=500, detail="Something went wrong")

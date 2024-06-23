@@ -23,21 +23,36 @@ body {
 }
 
 #chat_container {
+  padding: 10px;
   flex: 1;
   width: 100%;
   max-width: 800px;
   height: 100%;
   overflow-y: scroll;
-
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-
   padding-bottom: 20px;
   scroll-behavior: smooth;
+}
+
+#chat_container::-webkit-scrollbar {
+  width: 8px; /* Width of the entire scrollbar */
+}
+
+#chat_container::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+#chat_container::-webkit-scrollbar-thumb {
+  background-color: #888; 
+  border-radius: 4px; 
+}
+
+#chat_container::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
 }
 
 .wrapper {
