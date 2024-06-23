@@ -59,7 +59,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
   const data = new FormData(form);
-
+  console.log(data.get('prompt'))
   chatContainer.innerHTML += chatStripe(false, data.get('prompt'));
   form.reset();
 
@@ -71,7 +71,7 @@ const handleSubmit = async (e) => {
   
   loader(messageDiv);
 
-  const response = await fetch('https://chatgpt-50ja.onrender.com', {
+  const response = await fetch('http://localhost:8000/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -80,6 +80,8 @@ const handleSubmit = async (e) => {
       prompt: data.get('prompt')
     })
   })
+
+  console.log(response)
 
   clearInterval(loadInterval);
   messageDiv.innerHTML = '';
