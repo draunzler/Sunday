@@ -1,8 +1,11 @@
-import bot from './assets/bot.svg'
-// import {marked} from 'marked';
+import bot from './assets/logo_dark.svg'
+import {marked} from 'marked';
 
 const form = document.querySelector('form');
 const chatContainer = document.querySelector('#chat_container');
+const textarea = document.getElementById("textbox");
+const inputForm = document.getElementById('inputForm');
+const originalHeight = '41.6px';
 
 let loadInterval;
 
@@ -43,7 +46,7 @@ function chatStripe (isAi, value, uniqueId) {
     <div class = "wrapper ${isAi && 'ai'}">
       <div class = "chat">
         ${isAi ? `<div class="profile">
-          <img src="${bot}" alt="bot"/>
+          <img class="profileImg" src="${bot}" alt="bot"/>
         </div>` : ''}
         <div class = "message" id = ${uniqueId}>${value}</div>
       </div>
@@ -66,6 +69,8 @@ const handleSubmit = async (e) => {
   chatContainer.scrollTop = chatContainer.scrollHeight;
   const messageDiv = document.getElementById(uniqueId);
   
+  const rotatingImage = messageDiv.previousElementSibling.querySelector('.profileImg');
+  rotatingImage.classList.add('rotate');
   loader(messageDiv);
 
   const response = await fetch('http://localhost:8000/', {
@@ -81,9 +86,13 @@ const handleSubmit = async (e) => {
   clearInterval(loadInterval);
   messageDiv.innerHTML = '';
 
+  rotatingImage.classList.remove('rotate');
+
   if(response.ok) {
     const data = await response.json();
-    const parsedData = data.bot.trim();
+    let parsedData = data.bot.trim();
+
+    parsedData = marked(parsedData);
     messageDiv.innerHTML = parsedData;
     // typeText(messageDiv, parsedData);
   } else {
@@ -93,17 +102,27 @@ const handleSubmit = async (e) => {
   }
 }
 
-form.addEventListener('submit', handleSubmit);
+form.addEventListener('submit', (e) => {
+  resetHeight(e);
+  handleSubmit(e);
+});
 form.addEventListener('keyup', (e) => {
-  if(e.keyCode === 13) {
-    handleSubmit(e);
+  if (e.keyCode === 13 && !e.shiftKey) {
+    e.preventDefault();
+  textarea.style.height = originalHeight;
+  handleSubmit(e);
   }
 })
 
-textarea = document.querySelector("#textbox");
-  textarea.addEventListener('input', autoResize, false);
+function resetHeight(e) {
+  e.preventDefault();
+  console.log("log");
+  textarea.style.height = originalHeight;
+}
 
-  function autoResize() {
-    this.style.height = 'auto';
-    this.style.height = this.scrollHeight + 'px';
+textarea.addEventListener('input', autoResize);
+
+function autoResize() {
+  textarea.style.height = 'auto';
+  textarea.style.height = `${Math.max(textarea.scrollHeight, 41.6)}px`;
 }

@@ -38,7 +38,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["*"],
@@ -74,7 +74,7 @@ async def generate_response(prompt_request: PromptRequest):
         # else:
         response = gemini_model.generate_content(prompt)
         logger.info(f"{response.text}")
-        return {"bot": markdown2.markdown(response.text)}
+        return {"bot": response.text}
     except Exception as e:
         logger.error(f"Error generating response: {e}")
         raise HTTPException(status_code=500, detail="Something went wrong")
