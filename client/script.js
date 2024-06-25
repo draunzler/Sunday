@@ -4,7 +4,6 @@ import {marked} from 'marked';
 const form = document.querySelector('form');
 const chatContainer = document.querySelector('#chat_container');
 const textarea = document.getElementById("textbox");
-const inputForm = document.getElementById('inputForm');
 const originalHeight = '41.6px';
 
 let loadInterval;
@@ -94,7 +93,7 @@ const handleSubmit = async (e) => {
 
     parsedData = marked(parsedData);
     messageDiv.innerHTML = parsedData;
-    // typeText(messageDiv, parsedData);
+    // typeText(messageDiv, tempDiv.innerHTML);
   } else {
     const err = await response.text();
     messageDiv.innerHTML = "Something went wrong";
@@ -103,7 +102,6 @@ const handleSubmit = async (e) => {
 }
 
 form.addEventListener('submit', (e) => {
-  resetHeight(e);
   handleSubmit(e);
 });
 form.addEventListener('keyup', (e) => {
@@ -114,15 +112,19 @@ form.addEventListener('keyup', (e) => {
   }
 })
 
-function resetHeight(e) {
-  e.preventDefault();
-  console.log("log");
-  textarea.style.height = originalHeight;
-}
-
 textarea.addEventListener('input', autoResize);
 
 function autoResize() {
   textarea.style.height = 'auto';
   textarea.style.height = `${Math.max(textarea.scrollHeight, 41.6)}px`;
+}
+
+document.addEventListener('visibilitychange', function() {
+  if (document.visibilityState === 'visible') {
+    document.getElementById('textbox').focus();
+  }
+});
+
+window.onload = function() {
+  document.getElementById('myTextarea').focus(); 
 }
