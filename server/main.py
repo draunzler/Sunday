@@ -9,7 +9,6 @@ import openai
 import os
 import logging
 import uvicorn
-import markdown2
 
 load_dotenv()
 
