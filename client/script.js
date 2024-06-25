@@ -73,7 +73,7 @@ const handleSubmit = async (e) => {
   rotatingImage.classList.add('rotate');
   loader(messageDiv);
 
-  const response = await fetch('http://localhost:8000/', {
+  const response = await fetch('https://sunday-hx52.onrender.com/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
