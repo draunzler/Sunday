@@ -19,17 +19,6 @@ function loader(element) {
     }
   }, 300);
 }
-function typeText(element, text){
-  let index = 0;
-  let interval = setInterval(() => {
-    if(index < text.length) {
-      element.innerHTML += text.charAt(index);
-      index++;
-    } else {
-      clearInterval(interval);
-    }
-  }, 10)
-}
 
 function generateUniqueId() {
   const timestamp = Date.now();
@@ -58,6 +47,16 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
   const data = new FormData(form);
+  const promptData = data.get('prompt').trim();
+
+  if (!promptData) {
+    form.classList.add('shake');
+    setTimeout(() => {
+      form.classList.remove('shake');
+    }, 500);
+    return;
+  }
+
   console.log(data.get('prompt'))
   chatContainer.innerHTML += chatStripe(false, data.get('prompt'));
   form.reset();
@@ -93,7 +92,6 @@ const handleSubmit = async (e) => {
 
     parsedData = marked(parsedData);
     messageDiv.innerHTML = parsedData;
-    // typeText(messageDiv, tempDiv.innerHTML);
   } else {
     const err = await response.text();
     messageDiv.innerHTML = "Something went wrong";
@@ -102,13 +100,14 @@ const handleSubmit = async (e) => {
 }
 
 form.addEventListener('submit', (e) => {
+  textarea.style.height = originalHeight;
   handleSubmit(e);
 });
 form.addEventListener('keyup', (e) => {
   if (e.keyCode === 13 && !e.shiftKey) {
     e.preventDefault();
-  textarea.style.height = originalHeight;
-  handleSubmit(e);
+    textarea.style.height = originalHeight;
+    handleSubmit(e);
   }
 })
 

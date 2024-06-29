@@ -188,11 +188,31 @@ pre {
   border: 1px solid #ffffff35;
   border-radius: 10px;
   overflow-x: auto;
+  scrollbar-color: #888 transparent;
+  scrollbar-width: thin;
 }
 
 pre code {
   font-family: monospace;
   font-size: 14px;
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  10% { transform: translateX(-5px); }
+  20% { transform: translateX(5px); }
+  30% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  50% { transform: translateX(-5px); }
+  60% { transform: translateX(5px); }
+  70% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+  90% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
 }
 
 @keyframes rotate {
