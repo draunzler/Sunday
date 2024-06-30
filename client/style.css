@@ -232,6 +232,7 @@ pre code {
   margin-top: 4px;
   align-self: center;
   width: 100%;
+  font-size: 18px;
   max-width: 800px;
   outline-offset: 2px;
   outline: 2.5px solid transparent;
