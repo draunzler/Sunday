@@ -275,7 +275,7 @@ thead th:first-child {
   border-top-left-radius: 10px;
 }
 thead th:last-child {
-  border-top-right-radius: 1px;
+  border-top-right-radius: 10px;
 }
 tbody tr:last-child td:first-child {
   border-bottom-left-radius: 10px;
@@ -294,4 +294,26 @@ tbody tr:nth-child(even) {
 #genChart img{
   width: 25px;
   height: 25px;
+}
+
+.pre-wrapper {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px;
+  background-color: #58D033;
+  color: #121212;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.copy-btn img{
+  width: 20px;
+  height: auto;
 }
