@@ -73,7 +73,7 @@ const handleSubmit = async (e) => {
   loader(messageDiv);
 
   const response = await fetch('https://sunday-hx52.onrender.com/', {
-    // http://127.0.0.1:8000/
+    // http://127.0.0.1:8000/https://sunday-hx52.onrender.com/
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -94,6 +94,20 @@ const handleSubmit = async (e) => {
 
     parsedData = marked(parsedData);
     messageDiv.innerHTML = parsedData;
+
+    const preTags = messageDiv.querySelectorAll('pre');
+    preTags.forEach((preTag, index) => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'pre-wrapper';
+      preTag.parentNode.insertBefore(wrapper, preTag);
+      wrapper.appendChild(preTag);
+
+      const copyButton = document.createElement('button');
+      copyButton.className = 'copy-btn';
+      copyButton.innerHTML = 'Copy Code <img src="assets/copy.svg" alt="copy">';
+      copyButton.dataset.target = `${uniqueId}-pre-${index}`;
+      wrapper.appendChild(copyButton);
+    });
   } else {
     const err = await response.text();
     messageDiv.innerHTML = "Something went wrong";
@@ -150,3 +164,24 @@ document.addEventListener('visibilitychange', function() {
 window.onload = function() {
   document.getElementById('myTextarea').focus(); 
 }
+
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    alert("Copied to clipboard!");
+  }).catch(err => {
+    console.error("Could not copy text: ", err);
+    alert("Failed to copy to clipboard.");
+  });
+}
+
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('copy-btn')) {
+    const preTag = event.target.previousElementSibling;
+
+    if (preTag && preTag.tagName.toLowerCase() === 'pre') {
+      copyToClipboard(preTag.innerText);
+    } else {
+      alert("No preformatted text found to copy.");
+    }
+  }
+});
