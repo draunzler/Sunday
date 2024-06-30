@@ -241,3 +241,11 @@ pre code {
 #forget:hover{
   outline: 2.5px solid #fff;
 }
+
+table {
+  border-collapse: collapse;
+}
+table, th, td {
+  border: 1px solid #ffffff50;
+  padding: 10px;
+}
