@@ -5,6 +5,7 @@ const form = document.querySelector('form');
 const chatContainer = document.querySelector('#chat_container');
 const textarea = document.getElementById("textbox");
 const originalHeight = '41.6px';
+const forgetButton = document.getElementById('forget');
 
 let loadInterval;
 
@@ -72,6 +73,7 @@ const handleSubmit = async (e) => {
   loader(messageDiv);
 
   const response = await fetch('https://sunday-hx52.onrender.com/', {
+    // http://127.0.0.1:8000/
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -110,6 +112,27 @@ form.addEventListener('keyup', (e) => {
     handleSubmit(e);
   }
 })
+
+forgetButton.addEventListener('click', async () => {
+  try {
+    const response = await fetch('https://sunday-hx52.onrender.com/forget', {
+      method: 'POST',
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data.message);
+      alert(data.message);
+    } else {
+      const error = await response.text();
+      console.error('Error clearing memory:', error);
+      alert('Error clearing memory:', error);
+    }
+  } catch (error) {
+    console.error('Error fetching forget endpoint:', error);
+    alert('Error fetching forget endpoint:', error);
+  }
+});
 
 textarea.addEventListener('input', autoResize);
 
