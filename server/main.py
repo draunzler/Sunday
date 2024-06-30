@@ -39,7 +39,7 @@ google_llm = GoogleGenerativeAI(api_key=genai_api_key, model="gemini-1.5-flash")
 
 prompt = PromptTemplate(
     input_variables=["history", "input"],
-    template="The following is a conversation with an AI assistant named Sunday. The assistant is helpful, creative, clever, and very friendly.\n\n{history}\nHuman: {input}\nAI:"
+    template="The following is a conversation with an AI assistant named Sunday. The assistant is helpful, creative, clever, and very friendly.\n\n{history}\nHuman: {input}\nAI:\n\nIf the user requests a chart, provide a table of data at the end of your response that can be used to generate the chart. The table should be formatted clearly with columns and rows."
 )
 
 memory = ConversationBufferMemory(memory_key="history")
