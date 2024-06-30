@@ -242,10 +242,56 @@ pre code {
   outline: 2.5px solid #fff;
 }
 
-table {
+/* table {
+  border-radius: 15px;
+  width: 100%;
   border-collapse: collapse;
 }
 table, th, td {
   border: 1px solid #ffffff50;
   padding: 10px;
+} */
+
+table {
+  border-spacing: 0;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #ffffff25;
+}
+th, td {
+  border: none;
+  text-align: center;
+  padding: 8px;
+}
+th {
+  background-color: #20232A;
+  /* color: #121212; */
+}
+/* tr:not(:last-child) td{
+  border-bottom: 1px solid #ffffff25;
+} */
+thead th:first-child {
+  border-top-left-radius: 10px;
+}
+thead th:last-child {
+  border-top-right-radius: 1px;
+}
+tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+tbody tr:nth-child(odd) {
+  background-color: transparent;
+}
+tbody tr:nth-child(even) {
+  background-color: #20232A60;
+  ;
+}
+
+#genChart img{
+  width: 25px;
+  height: 25px;
 }
