@@ -1,4 +1,5 @@
-import bot from './assets/logo_dark.svg'
+import bot from './assets/logo_dark.svg';
+import copy from './assets/copy.svg';
 import {marked} from 'marked';
 
 const form = document.querySelector('form');
@@ -104,7 +105,7 @@ const handleSubmit = async (e) => {
 
       const copyButton = document.createElement('button');
       copyButton.className = 'copy-btn';
-      copyButton.innerHTML = 'Copy Code <img src="/assets/copy.svg" alt="copy">';
+      copyButton.innerHTML = 'Copy Code <img src="./assets/copy.svg" alt="copy">';
       copyButton.dataset.target = `${uniqueId}-pre-${index}`;
       wrapper.appendChild(copyButton);
     });
