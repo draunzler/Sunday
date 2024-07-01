@@ -1,6 +1,8 @@
 import bot from './assets/logo_dark.svg';
 import copy from './assets/copy.svg';
 import {marked} from 'marked';
+import Toastify from 'toastify-js';
+import "toastify-js/src/toastify.css";
 
 const form = document.querySelector('form');
 const chatContainer = document.querySelector('#chat_container');
@@ -112,7 +114,18 @@ const handleSubmit = async (e) => {
   } else {
     const err = await response.text();
     messageDiv.innerHTML = "Something went wrong";
-    alert(err);
+    Toastify({
+      text: `${err}`,
+      duration: 3000,
+      className: "error",
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "#101010",
+        boxShadow: "0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px ##CC1E4A50"
+      }
+    }).showToast();
   }
 }
 
@@ -137,15 +150,48 @@ forgetButton.addEventListener('click', async () => {
     if (response.ok) {
       const data = await response.json();
       console.log(data.message);
-      alert(data.message);
+      Toastify({
+        text: `${data.message}`,
+        duration: 3000,
+        className: "success",
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "#101010",
+          boxShadow: "0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px #58D03350"
+        }
+      }).showToast();
     } else {
       const error = await response.text();
       console.error('Error clearing memory:', error);
-      alert('Error clearing memory:', error);
+      Toastify({
+        text: `Error clearing memory: ${error}`,
+        duration: 3000,
+        className: "error",
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "#101010",
+          boxShadow: "0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px ##CC1E4A50"
+        }
+      }).showToast();
     }
   } catch (error) {
     console.error('Error fetching forget endpoint:', error);
-    alert('Error fetching forget endpoint:', error);
+    Toastify({
+      text: `Error fetchig forget endpoint: ${error}`,
+      duration: 3000,
+      className: "error",
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "#101010",
+        boxShadow: "0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px #CC1E4A50"
+      }
+    }).showToast();
   }
 });
 
@@ -168,10 +214,32 @@ window.onload = function() {
 
 function copyToClipboard(text) {
   navigator.clipboard.writeText(text).then(() => {
-    alert("Copied to clipboard!");
+    Toastify({
+      text: `Copied to clipboard!`,
+      duration: 3000,
+      className: "success",
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "#101010",
+        boxShadow: "0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px #58D03350"
+      }
+    }).showToast();
   }).catch(err => {
     console.error("Could not copy text: ", err);
-    alert("Failed to copy to clipboard.");
+    Toastify({
+      text: `Failed to copy to clipboard.`,
+      duration: 3000,
+      className: "error",
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "#101010",
+        boxShadow: "0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px #CC1E4A50"
+      }
+    }).showToast();
   });
 }
 
@@ -182,7 +250,17 @@ document.addEventListener('click', (event) => {
     if (preTag && preTag.tagName.toLowerCase() === 'pre') {
       copyToClipboard(preTag.innerText);
     } else {
-      alert("No preformatted text found to copy.");
+      Toastify({
+        text: `No preformatted text found to copy.`,
+        duration: 3000,
+        className: "info",
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "#101010",
+        }
+      }).showToast();
     }
   }
 });
