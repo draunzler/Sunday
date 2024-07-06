@@ -15,7 +15,7 @@ body {
   width: 100vw;
   height: 100vh;
   background: #121212;
-
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -315,5 +315,47 @@ tbody tr:nth-child(even) {
 
 .copy-btn img{
   width: 20px;
+  height: auto;
+}
+
+.cards{
+  display: flex;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  gap: 25px;
+}
+
+.card{
+  color: #ffffff50;
+  display: flex;
+  max-width: 200px;
+  flex-direction: column;
+  background: transparent;
+  gap: 20px;
+  border: 1px solid #ffffff25;
+  border-radius: 20px;
+  padding: 15px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.card.hide {
+  display: none;
+}
+
+.show{
+  opacity: 1;
+}
+
+@media screen and (max-width: 500px) {
+  .cards{
+    flex-direction: column;
+  }
+}
+
+.card img{
+  width: 30px;
   height: auto;
 }

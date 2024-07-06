@@ -14,6 +14,7 @@ const originalHeight = '41.6px';
 const forgetButton = document.getElementById('forget');
 const sendButton = document.querySelector('form button');
 const micIcon = document.querySelector('form button img');
+const cards = document.querySelectorAll('.card');
 
 let loadInterval;
 let isListening = false;
@@ -85,7 +86,9 @@ function showToast(message, type) {
     stopOnFocus: true,
     style: {
       background: '#101010',
-      boxShadow: '0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px #CC1E4A50',
+      maxWidth: '300px',
+      marginTop: '50px',
+      boxShadow: '0 3px 6px -1px rgba(0, 0, 0, 0.12), 0 10px 36px -4px #CC1E4A25',
     },
   }).showToast();
 }
@@ -103,7 +106,6 @@ sendButton.addEventListener('click', (e) => {
   }
 });
 
-// Event listeners for textarea
 textarea.addEventListener('input', (e) => {
   if (textarea.value.trim() !== '') {
     micIcon.src = sendIconSrc;
@@ -147,7 +149,7 @@ function chatStripe(isAi, value, uniqueId) {
 
 async function handleSubmit(e) {
   e.preventDefault();
-
+  cards.forEach(card => card.classList.add('hide'));
   const promptData = textarea.value.trim();
 
   if (!promptData) {
@@ -270,8 +272,12 @@ document.addEventListener('visibilitychange', function() {
 
 window.onload = function() {
   document.getElementById('textbox').focus();
+    cards.forEach((card, index) => {
+      setTimeout(() => {
+        card.classList.add('show');
+      }, index * 250);
+    });
 };
-
 function copyToClipboard(text) {
   navigator.clipboard.writeText(text)
     .then(() => {
