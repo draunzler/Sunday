@@ -291,6 +291,11 @@ tbody tr:nth-child(even) {
   ;
 }
 
+.table-pre-wrapper{
+  scrollbar-color: #888 transparent;
+  scrollbar-width: medium;
+}
+
 #genChart img{
   width: 25px;
   height: 25px;

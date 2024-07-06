@@ -212,6 +212,14 @@ async function handleSubmit(e) {
         copyButton.dataset.target = `${uniqueId}-pre-${index}`;
         wrapper.appendChild(copyButton);
       });
+      const tableTags = messageDiv.querySelectorAll('table');
+      tableTags.forEach(tableTag => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'table-pre-wrapper';
+        wrapper.style.overflowX = 'scroll';
+        tableTag.parentNode.insertBefore(wrapper, tableTag);
+        wrapper.appendChild(tableTag);
+      });
     } else {
       const err = await response.text();
       messageDiv.innerHTML = 'Something went wrong';
