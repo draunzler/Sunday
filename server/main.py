@@ -34,8 +34,8 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 
 genai_api_key = os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
-gemini_model = genai.GenerativeModel('gemini-1.5-flash')
-google_llm = GoogleGenerativeAI(api_key=genai_api_key, model="gemini-1.5-flash")
+gemini_model = genai.GenerativeModel('gemini-1.5-pro')
+google_llm = GoogleGenerativeAI(api_key=genai_api_key, model="gemini-1.5-pro")
 
 prompt = PromptTemplate(
     input_variables=["history", "input"],
