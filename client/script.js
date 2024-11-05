@@ -177,7 +177,7 @@ async function handleSubmit(e) {
   loader(messageDiv);
 
   try {
-    const response = await fetch('https://sunday-prod-6k8y.onrender.com/', {
+    const response = await fetch('https://sunday-hx52.onrender.com', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
